@@ -2,11 +2,12 @@ import React from 'react'
 import Layout from '@layout/Layout';
 import Axios from 'axios';
 
-function SSRTest({users}: {users: any[]}) {
+function SSRTest({users, req}: {users: any[], req: string}) {
 
 
     return (
         <Layout>
+            <p>{req}</p>
             {users?.map(user => <li key={user.id}>{user.username}</li>)}
         </Layout>
     )
@@ -15,7 +16,8 @@ function SSRTest({users}: {users: any[]}) {
 SSRTest.getInitialProps =  async ({req}: any) => {
     const response = await Axios.get('https://jsonplaceholder.typicode.com/users');
     return {
-      users: response.data
+      users: response.data,
+      req: req ? 'server' : 'client'
     }
   }
 
