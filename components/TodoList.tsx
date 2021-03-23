@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { css } from '@emotion/react';
 import { Todos } from '@modules/todos/slice';
 import { useToggleTodo } from '@hooks';
@@ -12,19 +13,25 @@ function TodoList({ todos }: { todos: Todos[] }) {
             {todos.map((todo) => {
                 const { id, title, completed } = todo;
                 return (
-                    <li key={id} onClick={() => toggleClicked({ id, todo })}>
+                    <li key={id}>
                         <h3
+                            onClick={() => toggleClicked({ id, todo })}
                             css={[
                                 todoStyle,
                                 css`
                                     &::before {
-                                        background-color: ${completed ? colors.green : colors.greys.placeholder};
+                                        background-color: ${completed
+                                            ? colors.green
+                                            : colors.greys.placeholder};
                                     }
                                 `,
                             ]}
                         >
                             {title}
                         </h3>
+                        <Link href="/todos/[id]" as={`/todos/${id}`}>
+                            go to detail
+                        </Link>
                     </li>
                 );
             })}
