@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Head from 'next/head';
 import { css } from '@emotion/react';
 import { useTodos } from '@hooks';
 import TodoList from '@components/TodoList';
@@ -49,20 +50,25 @@ function Todos() {
 
     // 기본 페이지
     return (
-        <div css={container}>
-            <Alert
-                error={error}
-                isLoading={isLoading}
-                isSuccess={isSuccess}
-                children={isLoading ? '데이터를 불러오는 중입니다' : '데이터 요청 성공'}
-            />
-            <div css={mainTitle}>TodoList</div>
-            <div css={buttonContainer}>
-                <Button children="데이터 불러오기" theme="primary" onClick={handleTodosData} />
-                <Button children="요청 취소" theme="secondary" onClick={cancelAsync} />
+        <>
+            <Head>
+                <title>Todolist</title>
+            </Head>
+            <div css={container}>
+                <Alert
+                    error={error}
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    children={isLoading ? '데이터를 불러오는 중입니다' : '데이터 요청 성공'}
+                />
+                <div css={mainTitle}>TodoList</div>
+                <div css={buttonContainer}>
+                    <Button children="데이터 불러오기" theme="primary" onClick={handleTodosData} />
+                    <Button children="요청 취소" theme="secondary" onClick={cancelAsync} />
+                </div>
+                <TodoList todos={todos} />
             </div>
-            <TodoList todos={todos} />
-        </div>
+        </>
     );
 }
 
