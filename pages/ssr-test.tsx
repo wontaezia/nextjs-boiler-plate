@@ -1,24 +1,13 @@
-import React from 'react'
-import Layout from '@layout/Layout';
-import Axios from 'axios';
+import React from 'react';
 
-function SSRTest({users, req}: {users: any[], req: string}) {
-
-
-    return (
-        <Layout>
-            <p>{req}</p>
-            {users?.map(user => <li key={user.id}>{user.username}</li>)}
-        </Layout>
-    )
+function SSRTest({ req }: { users: any[]; req: string }) {
+    return <p>{req} 에서 실행되었습니다.</p>;
 }
 
-SSRTest.getInitialProps =  async ({req}: any) => {
-    const response = await Axios.get('https://jsonplaceholder.typicode.com/users');
+SSRTest.getInitialProps = async ({ req }: any) => {
     return {
-      users: response.data,
-      req: req ? 'server' : 'client'
-    }
-  }
+        req: req ? 'server' : 'client',
+    };
+};
 
-export default SSRTest
+export default SSRTest;

@@ -1,10 +1,16 @@
-import React from 'react'
-import Layout from "@layout/Layout";
+import React from 'react';
+import Head from 'next/head';
+import Layout from '@layout/Layout';
 
-const About = () => (
-    <Layout>
-      <div>안녕하세요 반갑습니다</div>
-    </Layout>
-  );
-  
-  export default About;
+const About = () => {
+    return (
+        <>
+            <Head>
+                <title>About</title>
+            </Head>
+            <div>안녕하세요 반갑습니다</div>
+        </>
+    );
+};
+
+export default About;

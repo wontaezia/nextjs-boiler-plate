@@ -1,18 +1,11 @@
-import Layout from '@layout/Layout';
-import Head from 'next/head'
+import React from 'react';
 
-function Home() {
-  return (
-    <div>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        Hello!
-      </Layout>
-    </div>
-  )
+function Main() {
+    return (
+        <>
+            <div />
+        </>
+    );
 }
 
-export default Home;
+export default Main;
