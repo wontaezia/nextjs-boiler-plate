@@ -21,10 +21,17 @@ function Header() {
                     `,
                 ]}
             >
-                <Link href="/">home</Link>
-                <Link href="/todos">todos</Link>
-                <Link prefetch href="/ssr-test">
-                    ssr-test
+                <Link href="/">
+                    <a>home</a>
+                </Link>
+                <Link href="/todos">
+                    <a>todos</a>
+                </Link>
+                <Link href="/ssr-test">
+                    <a>ssr-test</a>
+                </Link>
+                <Link href="/result">
+                    <a>result</a>
                 </Link>
             </nav>
         </>

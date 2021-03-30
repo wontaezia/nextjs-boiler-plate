@@ -7,9 +7,10 @@ type ButtonProps = {
     disabled?: boolean;
     width?: string;
     onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+    custom?: any;
 };
 
-function Button({ children, theme, size, disabled, width, onClick }: ButtonProps) {
+function Button({ children, theme, size, disabled, width, onClick, custom }: ButtonProps) {
     return (
         <button
             css={[
@@ -19,6 +20,7 @@ function Button({ children, theme, size, disabled, width, onClick }: ButtonProps
                 css`
                     width: ${width ? width : 'auto'};
                 `,
+                custom,
             ]}
             disabled={disabled}
             onClick={onClick}

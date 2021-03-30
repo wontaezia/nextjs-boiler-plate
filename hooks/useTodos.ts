@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks';
 import { todosActions } from '@modules/todos/slice';
 
-function useTodos() {
+function useTodos(id?:string | string[] | undefined) {
     const dispatch: AppDispatch = useDispatch();
     const { todos, isLoading, isSuccess, error } = useTypedSelector((state) => {
         const {
@@ -18,6 +18,10 @@ function useTodos() {
         };
     });
 
+    let todo;
+    
+    if(id) todo = todos[Number(id) - 1]
+
     const getTodos = useCallback(
         ({ start, limit }) => dispatch(todosActions.getTodos({ start, limit })),
         [dispatch]
@@ -27,6 +31,7 @@ function useTodos() {
     ]);
 
     return {
+        todo,
         todos,
         isLoading,
         isSuccess,

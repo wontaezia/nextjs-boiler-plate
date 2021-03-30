@@ -14,7 +14,6 @@ type AlertProps = {
 function Alert({ children, error, isLoading, isSuccess, onClick }: AlertProps) {
     useEffect(() => {
         if (isLoading) {
-            gsap.killTweensOf('.alert')
             gsap.to('.alert', {
                 y: 0,
             });
@@ -24,18 +23,13 @@ function Alert({ children, error, isLoading, isSuccess, onClick }: AlertProps) {
                 y: '-200%',
             });
         }
-
     }, [isLoading, error, isSuccess]);
 
-    useEffect(() => () => gsap.killTweensOf('.alert'), [])
+    useEffect(() => () => gsap.killTweensOf('.alert'), []);
 
     return (
         <div className="alert" css={container} onClick={onClick}>
-            {error && !isLoading && !isSuccess ? (
-                <span css={badges['error']}>{error}</span>
-            ) : (
-                <span css={isLoading ? badges['loading'] : badges['success']}>{children}</span>
-            )}
+            {error && !isLoading && !isSuccess ? <span css={badges['error']}>{error}</span> : <span css={isLoading ? badges['loading'] : badges['success']}>{children}</span>}
         </div>
     );
 }

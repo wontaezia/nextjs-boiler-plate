@@ -1,12 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { Todos } from '@modules/todos/slice';
 import { useToggleTodo } from '@hooks';
+import Button from '@components/Button';
 import { colors } from '@styles/theme';
 
 function TodoList({ todos }: { todos: Todos[] }) {
     const { toggleClicked } = useToggleTodo();
+    const router = useRouter();
 
     return (
         <ul css={todosContainer}>
@@ -20,18 +23,23 @@ function TodoList({ todos }: { todos: Todos[] }) {
                                 todoStyle,
                                 css`
                                     &::before {
-                                        background-color: ${completed
-                                            ? colors.green
-                                            : colors.greys.placeholder};
+                                        background-color: ${completed ? colors.green : colors.greys.placeholder};
                                     }
                                 `,
                             ]}
                         >
                             {title}
                         </h3>
-                        <Link href="/todos/[id]" as={`/todos/${id}`}>
-                            go to detail
-                        </Link>
+                        <Button
+                            children="자세히 보기"
+                            theme="tertiary"
+                            size="small"
+                            custom={css`
+                                margin-left: 6px;
+                                margin-top: 4px;
+                            `}
+                            onClick={() => router.push(`/todos/${id}`)}
+                        />
                     </li>
                 );
             })}
@@ -44,12 +52,12 @@ export default TodoList;
 const todosContainer = css`
     li {
         margin: 10px 0;
-        cursor: pointer;
     }
 `;
 
 const todoStyle = css`
     font-size: 14px;
+    cursor: pointer;
 
     &::before {
         content: '';
