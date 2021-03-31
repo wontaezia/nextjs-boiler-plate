@@ -66,7 +66,7 @@ export const todosSlice = createSlice({
         },
         toggleTodoSuccessAsync: (state, { payload: todo }: PayloadAction<Todos>) => {
             console.log('saga에서 put 액션 호출 -- toggleTodoSuccessAsync');
-            // 데이터 요청에 대한 결과는 console에서 확인 가능합니다.
+            // 데이터 요청에 대한 결과는 console창에서 확인 가능합니다.
             // JSONPlaceholder를 이용하였기 때문에 store에는 업데이트가 이루어 지지만
             // 새로고침 시에 초기화됩니다.
 

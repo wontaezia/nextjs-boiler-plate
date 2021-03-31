@@ -14,6 +14,7 @@ type AlertProps = {
 function Alert({ children, error, isLoading, isSuccess, onClick }: AlertProps) {
     useEffect(() => {
         if (isLoading) {
+            gsap.killTweensOf('.alert');
             gsap.to('.alert', {
                 y: 0,
             });
@@ -25,6 +26,7 @@ function Alert({ children, error, isLoading, isSuccess, onClick }: AlertProps) {
         }
     }, [isLoading, error, isSuccess]);
 
+    // unmount시에 cleanup
     useEffect(() => () => gsap.killTweensOf('.alert'), []);
 
     return (
