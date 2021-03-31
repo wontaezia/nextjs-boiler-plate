@@ -2,71 +2,40 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import axios, { AxiosResponse } from 'axios';
 import { TODOS_API as API } from '@api/config';
-import { css } from '@emotion/react';
 import { useTodos } from '@hooks';
+import TodoTemplate from '@components/TodoTemplate';
 
-function Todo({ req, id, data }: any) {
+function Todo({ id, data }: any) {
     const { todo } = useTodos(id);
-
-    if (req) {
-        const { id, title, userId, completed } = data;
-
-        return (
-            <div>
-                <Head>
-                    <title>Todo {id}</title>
-                </Head>
-                <ul css={container}>
-                    <li>id: {id}</li>
-                    <li>title: {title}</li>
-                    <li>userId: {userId}</li>
-                    <li>completed: {String(completed)}</li>
-                </ul>
-            </div>
-        );
-    }
 
     return (
         <div>
             <Head>
-                <title>Todo {todo?.id}</title>
+                <title>Todo {id}</title>
             </Head>
-            <ul css={container}>
-                <li>id: {todo?.id}</li>
-                <li>title: {todo?.title}</li>
-                <li>userId: {todo?.userId}</li>
-                <li>completed: {String(todo?.completed)}</li>
-            </ul>
+            <TodoTemplate todo={data || todo} />
         </div>
     );
 }
 
 export default Todo;
 
-Todo.getInitialProps = async ({ req, asPath }: any) => {
-    // pathname : /todos/[id]
-    // asPath : /todos/1 혹은 /todos/2 ...
+// getInitialProps은 페이지 렌더링 시에 모든 요청을 처리함
 
+Todo.getInitialProps = async ({ req, asPath }: any) => {
+    // req는 SSR 방식으로 동작할 때만 값이 전해지기 때문에 이를 이용하여 데이터 예외 처리
     const id = Number(asPath.split('/')[2]);
 
     if (req) {
         const { data }: AxiosResponse = await axios.get(`${API}?id=${id}`);
         return {
-            req: 'server',
             id,
             data: data[0],
         };
     }
 
+    // CSR 방식일 때
     return {
         id,
     };
 };
-
-const container = css`
-    font-size: 14px;
-
-    li + li {
-        margin-top: 10px;
-    }
-`;
