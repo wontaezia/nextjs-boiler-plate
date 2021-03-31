@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Head from 'next/head';
 import { css } from '@emotion/react';
 import { useTodos } from '@hooks';
+import SEO from '@components/SEO';
 import TodoList from '@components/TodoList';
 import Button from '@components/Button';
 import Alert from '@components/Alert';
-import { flex } from '@styles/theme';
 
 function Todos() {
     const { todos, isLoading, error, getTodos, cancelTodos, isSuccess } = useTodos();
@@ -51,9 +50,7 @@ function Todos() {
     // 기본 페이지
     return (
         <div>
-            <Head>
-                <title>Todolist</title>
-            </Head>
+            <SEO />
             <Alert error={error} isLoading={isLoading} isSuccess={isSuccess} children={isLoading ? '데이터를 불러오는 중입니다' : '데이터 요청 성공'} />
             <div css={mainTitle}>TodoList</div>
             <div css={buttonContainer}>
