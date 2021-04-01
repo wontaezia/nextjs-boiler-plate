@@ -1,19 +1,31 @@
-import { AppProps } from 'next/app';
+import { useState, useEffect } from 'react';
+import { AppProps, AppContext } from 'next/app';
+import Head from 'next/head';
+import { Provider } from 'react-redux';
 import { SwitchTransition, Transition } from 'react-transition-group';
 import gsap from 'gsap';
 import Layout from '@layout/Layout';
-import { Provider } from 'react-redux';
 import store from '@modules/store';
 import { Global } from '@emotion/react';
 import globalStyles from '@styles/global';
 
-function MyApp({ Component, pageProps, router }: AppProps) {
+interface MyAppProps extends AppProps {
+    isClient: boolean;
+}
+
+function MyApp({ Component, pageProps, router, isClient }: MyAppProps) {
     return (
         <Provider store={store}>
-            <Layout>
+            <Head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+                <meta name="description" content="My First Static Website" />
+                <meta name="keywords" content="nextjs,static,website" />
+            </Head>
+            <Layout path={router.pathname} isClient={isClient}>
                 <SwitchTransition>
                     <Transition key={router.pathname} timeout={600} in={true} onEnter={enter} onExit={exit} mountOnEnter={true} unmountOnExit={true}>
-                        <Component {...pageProps} />
+                        <Component isClient={isClient} {...pageProps} />
                     </Transition>
                 </SwitchTransition>
             </Layout>
@@ -37,3 +49,12 @@ function exit(node: HTMLElement) {
         autoAlpha: 0,
     });
 }
+
+MyApp.getInitialProps = ({ ctx }: AppContext) => {
+    const { req } = ctx;
+    const isClient = !req || req.url?.startsWith('/_next/data');
+
+    return {
+        isClient,
+    };
+};

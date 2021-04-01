@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head';
 import Button from '@components/Button';
 import { useRouter } from 'next/router';
@@ -17,3 +16,14 @@ function Error() {
 }
 
 export default Error;
+
+// error 페이지 접근 시에 index 페이지로 자동 리다이렉트를 해주는 방법
+Error.getInitialProps = () => {
+    return {
+        // returns a redirect to an internal page `/another-page`
+        redirect: {
+            destination: '/',
+            permanent: false,
+        },
+    };
+};

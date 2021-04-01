@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head';
 import { data as Test } from 'testData.json';
 

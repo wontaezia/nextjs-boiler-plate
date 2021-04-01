@@ -12,4 +12,6 @@ export default function* rootWatcher() {
 
     //! throttle
     // takeLeading는 함수 실행 도중 중복 요청 발생 시 그 사이에 들어온 액션은 무시하고 처음에 들어온 액션을 우선으로 처리하도록 관리해줍니다.
+
+    // takeEvery는 모든 요청을 처리합니다.
 }

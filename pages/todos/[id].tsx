@@ -1,18 +1,17 @@
-import React from 'react';
-import { NextPageContext } from 'next';
+import { GetServerSideProps } from 'next';
 import axios, { AxiosResponse } from 'axios';
 import { TODOS_API as API } from '@api/config';
 import { useTodos } from '@hooks';
 import TodoTemplate from '@components/TodoTemplate';
 import SEO from '@components/SEO';
 
-function Todo({ id, data }: any) {
-    const { todo } = useTodos(id);
+function Todo(props: any) {
+    const { todo } = useTodos(props.id);
 
     return (
         <div>
-            <SEO desc="" title={`Todo ${id}`} image="" canonical="" icon="" keywords="" />
-            <TodoTemplate todo={data || todo} />
+            <SEO desc="" title={`Todo ${props.id}`} image="" canonical="" icon="" keywords="" />
+            <TodoTemplate todo={props.data || todo} />
         </div>
     );
 }
@@ -21,20 +20,25 @@ export default Todo;
 
 // getInitialProps은 페이지 렌더링 시에 모든 요청을 처리함
 
-Todo.getInitialProps = async ({ req, asPath }: NextPageContext) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
     // req는 SSR 방식으로 동작할 때만 값이 전해지기 때문에 이를 이용하여 데이터 예외 처리
-    const id = Number(asPath?.split('/')[2]);
+    const id = Number(query.id);
+    const isClient = !req || req.url?.startsWith('/_next/data');
 
-    if (req) {
+    if (!isClient) {
         const { data }: AxiosResponse = await axios.get(`${API}?id=${id}`);
         return {
-            id,
-            data: data[0],
+            props: {
+                id,
+                data: data[0],
+            },
         };
     }
 
     // CSR 방식일 때
     return {
-        id,
+        props: {
+            id,
+        },
     };
 };
