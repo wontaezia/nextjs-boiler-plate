@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
 type SSRTestProps = {
@@ -16,3 +17,13 @@ function SSRTest({ isClient }: SSRTestProps) {
 }
 
 export default SSRTest;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+    const isClient = !req || req.url?.startsWith('/_next/data');
+
+    return {
+        props: {
+            isClient,
+        },
+    };
+};
