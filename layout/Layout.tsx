@@ -6,7 +6,8 @@ import { flex } from '@styles/theme';
 
 function Layout({ children, isClient }: any) {
     const { getTodos } = useTodos();
-    // 화면에는 그려지지만 모든 API통신은 뒤에서 동작하도록?
+    // 빠른 초기의 렌더링을 위해 사전에 데이터를 내려받지 않고
+    // 모든 API통신을 렌더링 후 동작하도록 했습니다.
     useEffect(() => {
         if (!isClient) {
             getTodos({ start: 0, limit: 10 });

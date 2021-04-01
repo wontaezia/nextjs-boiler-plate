@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps, router, isClient }: MyAppProps) {
             <Layout path={router.pathname} isClient={isClient}>
                 <SwitchTransition>
                     <Transition key={router.pathname} timeout={600} in={true} onEnter={enter} onExit={exit} mountOnEnter={true} unmountOnExit={true}>
-                        <Component isClient={isClient} {...pageProps} />
+                        <Component {...pageProps} />
                     </Transition>
                 </SwitchTransition>
             </Layout>
