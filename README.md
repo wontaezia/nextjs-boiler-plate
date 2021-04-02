@@ -34,7 +34,11 @@ $ npm i
 ## 로컬 서버 실행
 
 ```
+<<<<<<< HEAD
 & npm run dev
+=======
+& npm run dev 혹은 yarn dev
+>>>>>>> ed81dd9702217c1bc07b89e285029f2d4b704d3e
 ```
 
 ## \_app.js
@@ -45,14 +49,25 @@ pages/\_app.js는 Next.js SSR cycle에서 가장 먼저 실행되는 파일로
 -   전역 상태를 관리하는 store
 -   global Style
 -   transition
+<<<<<<< HEAD
+=======
+
+>>>>>>> ed81dd9702217c1bc07b89e285029f2d4b704d3e
     등과 같이 요청한 페이지의 URL과 상관없이 모든 페이지를 감싸야하는 것들을 관리하는 파일입니다.
 
 ## \_document.js
 
 `Next.js`의 root document로 content들을 브라우저가 `HTML`로 이해하도록 구조화 시켜주는 곳입니다.
+<<<<<<< HEAD
 Main 컴포넌트에서는 \_app.js에서 만들어진 컴포넌트가 전달되어 구성하게 됩니다.
 
 document.js와 app.js는 처음 SSR시에만 사용되는 server only file이기 때문에 **window**객체에 접근하여 사용하는 것은 불가능하다. 접근 시 `window is not defined` 오류가 발생
+=======
+
+Main 컴포넌트에서는 \_app.js에서 만들어진 컴포넌트가 전달되어 구성하게 됩니다.
+
+\_app.js와 \_document.js파일은 server only file이기 때문에 **window**객체에 접근하여 사용하는 것은 불가능합니다.
+>>>>>>> ed81dd9702217c1bc07b89e285029f2d4b704d3e
 
 ## Next.js SSR Cycle
 
