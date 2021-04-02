@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+// 해당 slice에 저장되는 데이터의 타입을 지정합니다.
 export type Todos = {
     userId: number;
     id: number;
@@ -19,6 +20,7 @@ type TodosState = {
 export const todosSlice = createSlice({
     name: 'todos',
     initialState: {
+        // 지정된 타입에 맞게 초기값을 입력합니다.
         todos: [],
         isLoading: true,
         isSuccess: false,

@@ -9,7 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
     reducer: rootReducer,
     middleware: [sagaMiddleware, logger],
-    devTools: true,
+    devTools: true, // 개발 모드에서는 true로 값을 지정하여 devTools을 사용하고 실제 배포 시에는 false로 변경합니다.
 });
 
 sagaMiddleware.run(rootWatcher);

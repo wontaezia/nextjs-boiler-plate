@@ -1,5 +1,5 @@
 import 'react-app-polyfill/ie11';
-import { AppProps, AppContext } from 'next/app';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { SwitchTransition, Transition } from 'react-transition-group';
@@ -9,11 +9,7 @@ import store from '@modules/store';
 import { Global } from '@emotion/react';
 import globalStyles from '@styles/global';
 
-interface MyAppProps extends AppProps {
-    isClient: boolean;
-}
-
-function MyApp({ Component, pageProps, router, isClient }: MyAppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
     return (
         <Provider store={store}>
             <Head>
@@ -22,7 +18,7 @@ function MyApp({ Component, pageProps, router, isClient }: MyAppProps) {
                 <meta name="description" content="My First Static Website" />
                 <meta name="keywords" content="nextjs,static,website" />
             </Head>
-            <Layout path={router.pathname} isClient={isClient}>
+            <Layout path={router.pathname}>
                 <SwitchTransition>
                     <Transition key={router.pathname} timeout={600} in={true} onEnter={enter} onExit={exit} mountOnEnter={true} unmountOnExit={true}>
                         <Component {...pageProps} />
@@ -51,12 +47,3 @@ function exit(node: HTMLElement) {
         autoAlpha: 0,
     });
 }
-
-MyApp.getInitialProps = ({ ctx }: AppContext) => {
-    const { req } = ctx;
-    const isClient = !req || req.url?.startsWith('/_next/data');
-
-    return {
-        isClient,
-    };
-};

@@ -24,8 +24,7 @@ function SSRTest({ data }: SSGTestProps) {
 export default SSRTest;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const id = 1;
-    const { data }: AxiosResponse = await axios.get(`${API}?id=${id}`);
+    const { data }: AxiosResponse = await axios.get(`${API}?id=1`);
     return {
         props: {
             data: data[0],

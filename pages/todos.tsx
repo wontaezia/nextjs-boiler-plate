@@ -45,7 +45,7 @@ function Todos() {
     // 기본 페이지
     return (
         <div>
-            <SEO title="" desc="" canonical="" image="" icon="" keywords="" />
+            <SEO title="TodoList" desc="" canonical="" image="" icon="" keywords="" />
             <Alert error={error} isLoading={isLoading} isSuccess={isSuccess} children={isLoading ? '데이터를 불러오는 중입니다' : '데이터 요청 성공'} />
             <div css={mainTitle}>TodoList</div>
             <div css={buttonContainer}>
@@ -67,7 +67,7 @@ const mainTitle = css`
 const buttonContainer = css`
     margin-bottom: 20px;
 
-    button + button {
+    button:not(:first-child) {
         margin-left: 10px;
     }
 `;

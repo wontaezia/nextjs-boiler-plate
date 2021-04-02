@@ -1,11 +1,14 @@
 import { GetServerSideProps } from 'next';
 import axios, { AxiosResponse } from 'axios';
 import { TODOS_API as API } from '@api/config';
+import SEO from '@components/SEO';
 
 function Result(props: any) {
     return (
         <div>
+            <SEO title={`result ${props.data.id}`} desc="" canonical="" image="" icon="" keywords="" />
             {props.data.id}, {props.data.title}
+            <img src="/images/vercel.svg" alt="" />
         </div>
     );
 }

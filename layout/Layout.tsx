@@ -28,3 +28,12 @@ const container = css`
     ${flex('center', 'flex-start', 'column')}
     padding: 30px 100px 60px;
 `;
+
+export const getServerSideProps = ({ ctx }: any) => {
+    const { req } = ctx;
+    const isClient = !req || req.url?.startsWith('/_next/data');
+
+    return {
+        isClient,
+    };
+};
