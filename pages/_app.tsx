@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import 'react-app-polyfill/ie11';
 import { AppProps, AppContext } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps, router, isClient }: MyAppProps) {
 export default MyApp;
 
 function enter(node: HTMLElement) {
+    console.log({ enter: node });
     gsap.from(node, {
         duration: 0.5,
         autoAlpha: 0,
@@ -44,6 +45,7 @@ function enter(node: HTMLElement) {
 }
 
 function exit(node: HTMLElement) {
+    console.log({ exit: node });
     gsap.to(node, {
         duration: 0.5,
         autoAlpha: 0,

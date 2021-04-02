@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
@@ -9,32 +8,33 @@ function Header() {
     const { pathname } = router;
 
     return (
-        <>
-            <nav
-                css={[
-                    nav,
-                    css`
-                        a[href='${pathname}'] {
-                            color: ${colors.green};
-                            border-bottom: 3px solid ${colors.green};
-                        }
-                    `,
-                ]}
-            >
-                <Link href="/">
-                    <a>home</a>
-                </Link>
-                <Link href="/todos">
-                    <a>todos</a>
-                </Link>
-                <Link href="/ssr-test">
-                    <a>ssr-test</a>
-                </Link>
-                <Link href="/result">
-                    <a>result</a>
-                </Link>
-            </nav>
-        </>
+        <nav
+            css={[
+                nav,
+                css`
+                    a[href='${pathname}'] {
+                        color: ${colors.green};
+                        border-bottom: 3px solid ${colors.green};
+                    }
+                `,
+            ]}
+        >
+            <Link href="/">
+                <a>home</a>
+            </Link>
+            <Link href="/todos">
+                <a>todos</a>
+            </Link>
+            <Link href="/ssr-test">
+                <a>ssr-test</a>
+            </Link>
+            <Link href="/ssg-test">
+                <a>ssg-test</a>
+            </Link>
+            <Link href="/result">
+                <a>result</a>
+            </Link>
+        </nav>
     );
 }
 
