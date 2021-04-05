@@ -8,14 +8,14 @@ type SSGTestProps = {
     data: Todos;
 };
 
-function SSRTest({ data }: SSGTestProps) {
+function SSRTest({ data: { id, title } }: SSGTestProps) {
     return (
         <div>
             <Head>
                 <title>SSG Test</title>
             </Head>
             <p>
-                {data.id}, {data.title}
+                {id}, {title}
             </p>
         </div>
     );
